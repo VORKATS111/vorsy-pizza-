@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vorsy Pizza – Online Ordering</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: url('pizza-background.jpg') no-repeat center center fixed;
+      background-size: cover;
+    }
+
+    header {
+      background: rgba(211, 47, 47, 0.9);
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 15px 0 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      padding: 20px;
+    }
+
+    h2 {
+      color: #d32f2f;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .order-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: 20px auto;
+    }
+
+    .order-container input,
+    .order-container select,
+    .order-container button {
+      padding: 10px;
+      margin: 8px 0;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .button-box {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .button-box button {
+      width: 60%;
+      background: #d32f2f;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 8px;
+    }
+
+    .button-box button:hover {
+      background: #a50d0d;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 95%;
+      max-width: 1000px;
+      margin: 20px auto;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background: #d32f2f;
+      color: white;
+      font-size: 16px;
+    }
+
+    .section {
+      background: rgba(255,255,255,0.9);
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 800px;
+      margin: 20px auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: rgba(211, 47, 47, 0.9);
+      color: white;
+      margin-top: 20px;
+    }
+
+    .flowchart img {
+      width: 90%;
+      max-width: 800px;
+      display: block;
+      margin: 20px auto;
+    }
+
+    ol {
+      padding-left: 20px;
+    }
+  </style>
+  <script>
+    function addOrder(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('customerName').value;
+      const contact = document.getElementById('contact').value;
+      const address = document.getElementById('address').value;
+      const pizza = document.getElementById('pizzaType').value;
+      const size = document.getElementById('pizzaSize').value;
+      const quantity = parseInt(document.getElementById('quantity').value);
+      const deliveryDate = document.getElementById('deliveryDate').value;
+      const deliveryTime = document.getElementById('deliveryTime').value;
+
+      if (!name || !contact || !address || !pizza || !size || !quantity || !deliveryDate || !deliveryTime) {
+        alert("Please fill out all fields before submitting.");
+        return;
+      }
+
+      let price = 0;
+      if (size === "Small") price = 150;
+      else if (size === "Medium") price = 250;
+      else if (size === "Large") price = 350;
+
+      const total = price * quantity;
+
+      const table = document.getElementById('orderTable');
+      const newRow = table.insertRow();
+      newRow.insertCell(0).innerText = name;
+      newRow.insertCell(1).innerText = contact;
+      newRow.insertCell(2).innerText = address;
+      newRow.insertCell(3).innerText = pizza;
+      newRow.insertCell(4).innerText = size;
+      newRow.insertCell(5).innerText = quantity;
+      newRow.insertCell(6).innerText = "₱" + total;
+      newRow.insertCell(7).innerText = deliveryDate;
+      newRow.insertCell(8).innerText = deliveryTime;
+
+      document.getElementById('orderForm').reset();
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>🍕 VORSY PIZZA</h1>
+    <p>Fresh, Hot, and Delicious Pizza Delivered to Your Door!</p>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#order">Order Now</a></li>
+        <li><a href="#flowchart">Flowchart</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="section">
+      <h2>Our Goal</h2>
+      <p>
+        Welcome to <strong>Vorsy Pizza Online Ordering System</strong>!  
+        We aim to make pizza ordering simple and convenient for our customers.  
+        Order online and get your pizza delivered fast and fresh!
+      </p>
+    </section>
+
+    <section id="process" class="section">
+      <h2>Ordering Process</h2>
+      <ol>
+        <li>Open the Vorsy Pizza Homepage.</li>
+        <li>Navigate to the Order Section.</li>
+        <li>Fill out the order form with details (customer info, pizza type, quantity, delivery date/time).</li>
+        <li>System validates the inputs.</li>
+        <li>Calculate the total price of the order.</li>
+        <li>Save the order in the system.</li>
+        <li>View the list of all pizza orders below.</li>
+      </ol>
+      <p><strong>Note:</strong> This process ensures quick and efficient pizza ordering for our customers.</p>
+    </section>
+
+    <section id="order" class="section order-section">
+      <h2>Pizza Order Form</h2>
+      <div class="order-container">
+        <form id="orderForm" onsubmit="addOrder(event)">
+          <input type="text" id="customerName" placeholder="Customer Name" required>
+          <input type="text" id="contact" placeholder="Contact Number" required>
+          <input type="text" id="address" placeholder="Delivery Address" required>
+          <select id="pizzaType" required>
+            <option value="">Select Pizza</option>
+            <option value="Pepperoni">Pepperoni</option>
+            <option value="Hawaiian">Hawaiian</option>
+            <option value="Cheese">Cheese</option>
+            <option value="Veggie">Veggie</option>
+          </select>
+          <select id="pizzaSize" required>
+            <option value="">Select Size</option>
+            <option value="Small">Small - ₱150</option>
+            <option value="Medium">Medium - ₱250</option>
+            <option value="Large">Large - ₱350</option>
+          </select>
+          <input type="number" id="quantity" min="1" value="1" required>
+          <input type="date" id="deliveryDate" required>
+          <input type="time" id="deliveryTime" required>
+          <div class="button-box">
+            <button type="submit">Place Order</button>
+          </div>
+        </form>
+      </div>
+
+      <h2>Orders List</h2>
+      <table id="orderTable">
+        <tr>
+          <th>Customer Name</th>
+          <th>Contact</th>
+          <th>Address</th>
+          <th>Pizza Type</th>
+          <th>Size</th>
+          <th>Quantity</th>
+          <th>Total Price</th>
+          <th>Delivery Date</th>
+          <th>Delivery Time</th>
+        </tr>
+      </table>
+    </section>
+
+    <section id="flowchart" class="section flowchart">
+      <h2>Ordering Flowchart</h2>
+      <img src="images/flowchart.png" alt="Ordering Flowchart">
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Vorsy Pizza</p>
+  </footer>
+</body>
+  </html>
